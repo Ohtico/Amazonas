@@ -6,14 +6,29 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import { useForm } from '../hooks/useForm'
+import { registroEmailPasswordNombre } from '../actions/actionRegister'
+import { useDispatch } from "react-redux";
 
 
 const Registro = () => {
 
-    const [name, setName] = React.useState("");
-    const handleChange = (event) => {
-        setName(event.target.value);
-    };
+    const dispatch = useDispatch();
+    
+    const [formValues, handleInputChange] = useForm({
+
+        nombre: '',
+        email: '',
+        pass1: '',
+        pass2: ''
+
+    })
+    const { nombre, email, pass1, pass2 } = formValues;
+
+    const handleRegistro = (e) => {
+        e.preventDefault();
+        dispatch(registroEmailPasswordNombre(email, pass1, nombre))
+    }
 
     return (
         <Box
@@ -21,7 +36,7 @@ const Registro = () => {
                 display: 'flex',
                 textAlign: 'center',
                 alignItems: 'center',
-                
+
                 justifyContent: 'center',
                 '& > :not(style)': {
                     m: 3,
@@ -30,7 +45,7 @@ const Registro = () => {
                 },
             }}
         >
-            <form>
+            <form onSubmit={handleRegistro} >
                 <Paper
                     sx={{
                         p: 2,
@@ -48,8 +63,8 @@ const Registro = () => {
                                 placeholder="Ingrese nombre"
                                 type="text"
                                 name="nombre"
-                                value={name}
-                                onChange={handleChange}
+                                value={nombre}
+                                onChange={handleInputChange}
                             />
                         </FormControl>
                         <FormControl sx={{ width: '30ch', }}>
@@ -58,8 +73,8 @@ const Registro = () => {
                                 placeholder="Ingrese email"
                                 type="email"
                                 name="email"
-                                value={name}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={handleInputChange}
                             />
                         </FormControl>
                         <FormControl sx={{ width: '30ch' }}>
@@ -68,8 +83,8 @@ const Registro = () => {
                                 placeholder="Ingrese contraseña"
                                 type="password"
                                 name="pass1"
-                                value={name}
-                                onChange={handleChange}
+                                value={pass1}
+                                onChange={handleInputChange}
                             />
                         </FormControl>
                         <FormControl sx={{ width: '30ch' }}>
@@ -78,12 +93,13 @@ const Registro = () => {
                                 placeholder="Repita contraseña"
                                 type="password"
                                 name="pass2"
-                                value={name}
-                                onChange={handleChange}
+                                value={pass2}
+                                onChange={handleInputChange}
                             />
                         </FormControl>
                         <div>
                             <Button variant="contained" size="small"
+                                type="submit"
                                 sx={{ bgcolor: '#F0AD64', color: 'black', p: 1, width: '30ch' }}
                             >
                                 Registrarse
@@ -105,10 +121,10 @@ const Registro = () => {
                         <p>Al crear una cuenta, aceptas las Condiciones de Uso y el Aviso de Privacidad de amazonas.com.</p>
                         <p>¿Ya tienes una cuenta? </p>
                         <div>
-                            <Link to="/login">
-                            <Button variant="outlined"
-                                sx={{ color: 'white', p: 1, width: '35ch', border: '1px solid #F0AD64' }}
-                            > Iniciar sesión</Button></Link>
+                            <Link to="/auth">
+                                <Button variant="outlined"
+                                    sx={{ color: 'white', p: 1, width: '35ch', border: '1px solid #F0AD64' }}
+                                > Iniciar sesión</Button></Link>
                         </div>
                     </div>
                 </Paper>

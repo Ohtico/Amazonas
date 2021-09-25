@@ -6,14 +6,35 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
+import { useDispatch } from 'react-redux'
+import { loginSincrono, loginGoogle, loginFacebook } from '../actions/actionLogin'
 
 
 const Login = () => {
 
-    const [name, setName] = React.useState("");
-    const handleChange = (event) => {
-        setName(event.target.value);
-    };
+    const dispatch = useDispatch();
+
+    const [values, handleInputChange, reset ] = useForm({
+
+        email: '',
+        password: ''
+    })
+    
+    const {email, password} = values;
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        dispatch(loginSincrono(email, password));
+    }
+
+    const handleGoogle = () => {
+        dispatch(loginGoogle())
+    }
+
+    const handleFacebook = () => {
+        dispatch(loginFacebook())
+    }
 
     return (
         <Box
@@ -30,7 +51,7 @@ const Login = () => {
                 },
             }}
         >
-            <form>
+            <form onSubmit={handleLogin}>
                 <Paper
                     sx={{
                         p: 2,
@@ -48,8 +69,8 @@ const Login = () => {
                                 placeholder="Ingrese email"
                                 name="email"
                                 type="email"
-                                value={name}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={handleInputChange}
 
                             />
                         </FormControl>
@@ -59,8 +80,8 @@ const Login = () => {
                                 placeholder="Ingrese contraseña"
                                 name="password"
                                 type="password"
-                                value={name}
-                                onChange={handleChange}
+                                value={password}
+                                onChange={handleInputChange}
                             />
                         </FormControl>
                         <div>
@@ -72,12 +93,14 @@ const Login = () => {
 
                             <Button variant="outlined"
                                 sx={{ color: 'white', width: '28ch', m: 1 }}
+                                onClick={handleGoogle}
                             >
                                 Iniciar sesión <img src="https://res.cloudinary.com/ohtico/image/upload/c_scale,w_20/v1632526094/amazonas/2000px-Google_G_Logo.svg__afs75y.png" alt=""
                                 ></img>
                             </Button>
                             <Button variant="outlined"
                                 sx={{ color: 'white', width: '28ch', m: 1 }}
+                                onClick={handleFacebook}
                             >
                                 Iniciar sesión con <img src="https://res.cloudinary.com/ohtico/image/upload/c_scale,w_20/v1632529007/amazonas/facebook-logo-3-1_fegy6m.png" alt=""
                                 ></img>
