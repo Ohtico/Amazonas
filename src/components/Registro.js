@@ -46,6 +46,8 @@ const Registro = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Ingrese nombre"
+                                type="text"
+                                name="nombre"
                                 value={name}
                                 onChange={handleChange}
                             />
@@ -54,6 +56,8 @@ const Registro = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Ingrese email"
+                                type="email"
+                                name="email"
                                 value={name}
                                 onChange={handleChange}
                             />
@@ -62,6 +66,8 @@ const Registro = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Ingrese contraseña"
+                                type="password"
+                                name="pass1"
                                 value={name}
                                 onChange={handleChange}
                             />
@@ -70,6 +76,8 @@ const Registro = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Repita contraseña"
+                                type="password"
+                                name="pass2"
                                 value={name}
                                 onChange={handleChange}
                             />

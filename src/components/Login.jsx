@@ -46,6 +46,8 @@ const Login = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Ingrese email"
+                                name="email"
+                                type="email"
                                 value={name}
                                 onChange={handleChange}
 
@@ -55,6 +57,8 @@ const Login = () => {
                             <OutlinedInput
                                 sx={{ border: '1px solid #F0AD64', color: 'white', m: 1 }}
                                 placeholder="Ingrese contraseña"
+                                name="password"
+                                type="password"
                                 value={name}
                                 onChange={handleChange}
                             />
@@ -82,7 +86,7 @@ const Login = () => {
                         <p>Al continuar, aceptas las Condiciones de uso y el Aviso de privacidad de Amazonas.</p>
                         <p>¿Eres nuevo en Amazonas?</p>
                         <div>
-                            <Link to="/registro">
+                            <Link to="/auth/registro">
                                 <Button variant="outlined"
                                     sx={{ color: 'white', p: 1, width: '35ch', border: '1px solid #F0AD64' }}
                                 > Crea tu cuenta de Amazonas</Button></Link>

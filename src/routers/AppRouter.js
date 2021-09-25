@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Redirect,
 } from "react-router-dom";
 import Login from '../components/Login';
 import Registro from '../components/Registro';
+import PrivateRouter from './PrivateRouter';
+import PublicRouter from './PublicRouter';
+
 
 export default function AppRouter() {
+
+  const [auth, setAuth] = useState(false)
+
   return (
     <Router>
-        <Switch>
-          <Route exact path="/login"  component={Login}/>
-          <Route exact path="/registro"  component={Registro}/>
-        </Switch>
+      <Switch>
+        <PublicRouter exact path="/auth" isAuthenticated={auth} component={Login} />
+        <PublicRouter exact path="/auth/registro" isAuthenticated={auth} component={Registro} />
+        <Redirect to="/auth" />
+      </Switch>
     </Router>
   );
 }
