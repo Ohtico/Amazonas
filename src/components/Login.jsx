@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import FormControl from '@mui/material/FormControl';
 import Box from "@mui/material/Box";
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -8,24 +8,27 @@ import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
 import { useDispatch } from 'react-redux'
-import { loginSincrono, loginGoogle, loginFacebook } from '../actions/actionLogin'
+import { loginSincrono, loginGoogle, loginFacebook, loginEmailPassword } from '../actions/actionLogin'
+import { UserContext } from '../hooks/UserContext'
 
 
 const Login = () => {
 
+    const { setLogin } = useContext(UserContext)
     const dispatch = useDispatch();
 
-    const [values, handleInputChange, reset ] = useForm({
+    const [values, handleInputChange, reset] = useForm({
 
         email: '',
         password: ''
     })
-    
-    const {email, password} = values;
+
+    const { email, password } = values;
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(loginSincrono(email, password));
+        setLogin(true)
+        dispatch(loginEmailPassword(email, password));
     }
 
     const handleGoogle = () => {
@@ -86,6 +89,7 @@ const Login = () => {
                         </FormControl>
                         <div>
                             <Button variant="contained" size="small"
+                                type="submit"
                                 sx={{ bgcolor: '#F0AD64', color: 'black', p: 1, width: '30ch' }}
                             >
                                 Continuar
