@@ -10,7 +10,7 @@ import InputBase from '@mui/material/InputBase';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     color: 'black',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: '10px',
     backgroundColor: 'white',
     marginRight: theme.spacing(1),
     width: '100%',
@@ -23,6 +23,8 @@ const Search = styled('div')(({ theme }) => ({
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     backgroundColor: '#F0AD64',
+    borderTopRightRadius: '10px',
+    borderBottomRightRadius: '10px',
     height: '100%',
     position: 'absolute',
     right: '0px',
@@ -52,7 +54,9 @@ const BarraP = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar sx={{ backgroundColor: "black" }} >
-                <Toolbar>
+                <Toolbar
+                sx={{mx: 8 }}
+                >
                     <Typography
                         variant="h6"
                         noWrap
@@ -67,7 +71,7 @@ const BarraP = () => {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' }, ml: 5 }}
                     >
-                        <i className="material-icons" id="car">place</i>
+                        <i className="material-icons" id="car">location_on</i>
                     </Typography>
                     <Typography
                         variant="p"
@@ -88,7 +92,41 @@ const BarraP = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Box sx={{ flexGrow: 1 }} />
+                    <Typography
+                        variant="p"
+                        noWrap
+                        component="div"
+                        sx={{ ml: 5  }}
+                    >
+                        Cuenta     
+                    </Typography>
+                    <i className="material-icons" id="car">arrow_drop_down</i>
+                    <Typography
+                        variant="p"
+                        noWrap
+                        component="div"
+                        sx={{ mx: 4}}
+                    >
+                        Devoluciones
+                        <p>Y Pedidos</p>
+                    </Typography>
+                    <Typography
+                        variant="p"
+                        noWrap
+                        component="div"
+                        sx={{ ml: 5  }}
+                    >
+                        <i className="material-icons" id="car">shopping_cart</i>
+                    </Typography>
+                    <Typography
+                        variant="p"
+                        noWrap
+                        component="div"
+                        sx={{ ml: 2  }}
+                    >
+                        Carrito     
+                    </Typography>
+                    
                 </Toolbar>
             </AppBar>
         </Box>
