@@ -43,18 +43,16 @@ const BarraDos = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['Computadores', 'Smart Home', 'Arte y Artesania'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemText primary={text} />
+                        <i className="material-icons" id="car">keyboard_arrow_right</i>
                         <Divider />
                     </ListItem>
                 ))}
             </List>
         </Box>
     );
-
-
-
 
     return (
         <>
