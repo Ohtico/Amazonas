@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
+import BarraDos from './BarraDos';
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -126,9 +128,11 @@ const BarraP = () => {
                     >
                         Carrito     
                     </Typography>
-                    
+                   
                 </Toolbar>
+                <BarraDos/>
             </AppBar>
+            
         </Box>
     );
 }
