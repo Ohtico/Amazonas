@@ -7,11 +7,7 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-//import InboxIcon from '@mui/icons-material/MoveToInbox';
-//import MailIcon from '@mui/icons-material/Mail';
-
 
 
 const BarraDos = () => {
@@ -57,25 +53,25 @@ const BarraDos = () => {
     return (
         <>
             <Toolbar
-                sx={{ mx: 1 }}>
+                sx={{ backgroundColor: "#242F3E"  }}>
                 <Typography
                     variant="p"
                     noWrap
                     component="div"
                     sx={{ display: { xs: 'none', sm: 'block' }, mx: 1 }}>
                     {['left'].map((anchor) => (
-                    <React.Fragment key={anchor}>
-                        <Button onClick={toggleDrawer(anchor, true)}><i className="material-icons" id="car">menu</i></Button>
-                        <SwipeableDrawer
-                            anchor={anchor}
-                            open={state[anchor]}
-                            onClose={toggleDrawer(anchor, false)}
-                            onOpen={toggleDrawer(anchor, true)}
-                        >
-                            {list(anchor)}
-                        </SwipeableDrawer>
-                    </React.Fragment>
-                ))}
+                        <React.Fragment key={anchor}>
+                            <Button onClick={toggleDrawer(anchor, true)}><i className="material-icons" id="car">menu</i></Button>
+                            <SwipeableDrawer
+                                anchor={anchor}
+                                open={state[anchor]}
+                                onClose={toggleDrawer(anchor, false)}
+                                onOpen={toggleDrawer(anchor, true)}
+                            >
+                                {list(anchor)}
+                            </SwipeableDrawer>
+                        </React.Fragment>
+                    ))}
                 </Typography>
                 <Typography
                     variant="p"
@@ -105,7 +101,6 @@ const BarraDos = () => {
                     sx={{ ml: 2 }}>
                     Lo Más Vendidos
                 </Typography>
-
             </Toolbar>
         </>
     );

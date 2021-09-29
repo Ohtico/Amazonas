@@ -6,6 +6,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import BarraDos from './BarraDos';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../actions/actionLogin';
 
 
 
@@ -17,7 +19,7 @@ const Search = styled('div')(({ theme }) => ({
     marginRight: theme.spacing(1),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(5),
+        marginLeft: theme.spacing(3),
         width: 'auto',
     },
 }));
@@ -52,12 +54,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const BarraP = () => {
 
+    const dispatch = useDispatch()
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar sx={{ backgroundColor: "black" }} >
+            <AppBar  >
                 <Toolbar
-                sx={{mx: 8 }}
+                    sx={{ backgroundColor: "#131921" }}
                 >
                     <Typography
                         variant="h6"
@@ -98,16 +101,17 @@ const BarraP = () => {
                         variant="p"
                         noWrap
                         component="div"
-                        sx={{ ml: 5  }}
+                        sx={{ ml: 5 }}
                     >
-                        Cuenta     
+                        Cuenta
+                        <p onClick={() => dispatch(startLogout())} >Cerrar sesion</p>
                     </Typography>
                     <i className="material-icons" id="car">arrow_drop_down</i>
                     <Typography
                         variant="p"
                         noWrap
                         component="div"
-                        sx={{ mx: 4}}
+                        sx={{ mx: 4 }}
                     >
                         Devoluciones
                         <p>Y Pedidos</p>
@@ -116,7 +120,7 @@ const BarraP = () => {
                         variant="p"
                         noWrap
                         component="div"
-                        sx={{ ml: 5  }}
+                        sx={{ ml: 5 }}
                     >
                         <i className="material-icons" id="car">shopping_cart</i>
                     </Typography>
@@ -124,15 +128,15 @@ const BarraP = () => {
                         variant="p"
                         noWrap
                         component="div"
-                        sx={{ ml: 2  }}
+                        sx={{ ml: 2 }}
                     >
-                        Carrito     
+                        Carrito
                     </Typography>
-                   
+
                 </Toolbar>
-                <BarraDos/>
+                <BarraDos />
             </AppBar>
-            
+
         </Box>
     );
 }
