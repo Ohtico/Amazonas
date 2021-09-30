@@ -23,33 +23,56 @@ export const Productos = () => {
 
     const computadores = useSelector(state => state.product)
     const { product } = computadores
-    console.log(product);
+
 
     return (
 
         <Box sx={{ flexGrow: 1, mt: 20 }}>
             <Grid container spacing={2}>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Item sx={{ display: 'flex', mt: 2 }}>xs=4</Item>
                 </Grid>
-                <Grid item xs={7}>
+                <Grid item xs={8}>
 
                     {
                         product.map(probando => (
                             <Card sx={{ display: 'flex', mt: 2 }}>
                                 <CardMedia
                                     component="img"
-                                    sx={{ width: 180, m: 1 }}
+                                    sx={{ width: 190, m: 2 }}
                                     image={probando.image[0]}
                                     alt="Live from space album cover"
                                 />
                                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                     <CardContent sx={{ flex: '1 0 auto' }}>
-                                        <Typography component="div" variant="h6">
-                                            {probando.nombre}
+                                        <Typography component="div" variant="p">
+                                            <strong> {probando.nombre}</strong>
+                                        </Typography>
+                                        <div>
+                                            <i className="material-icons" id="car">
+                                                star
+                                            </i>
+                                            <i className="material-icons" id="car">
+                                                star
+                                            </i>
+                                            <i className="material-icons" id="car">
+                                                star
+                                            </i>
+                                            <i className="material-icons" id="car">
+                                                star
+                                            </i>
+                                            <i className="material-icons" id="car">
+                                                star
+                                            </i>
+                                        </div>
+                                        <Typography variant="h6" color="text.secondary" component="div">
+                                            us${probando.precio}
                                         </Typography>
                                         <Typography variant="p" color="text.secondary" component="div">
-                                            {probando.descripcion[0]}
+                                            us${probando.ahorras}
+                                        </Typography>
+                                        <Typography variant="h6" color="text.secondary" component="div">
+                                            Envio Gratis a Colombia
                                         </Typography>
                                     </CardContent>
                                 </Box>

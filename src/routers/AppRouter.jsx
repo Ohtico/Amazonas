@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import Login from '../components/Login';
 import Registro from '../components/Registro';
-import BarraP from '../components/BarraP';
 import { Productos } from '../components/Productos';
 import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {Listar} from '../actions/actionProduct'
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 // import { loginSincrono } from "../actions/actionLogin";
 //import { LoadTaks } from "../helpers/LoadTaks";
 
@@ -21,8 +21,7 @@ import { useDispatch } from "react-redux";
 export default function AppRouter() {
 
 
-  //const dispatch = useDispatch()
-  // const [checkin, setCheckin] = useState(true)
+  const [checkin, setCheckin] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const auth = getAuth()
   const dispatch = useDispatch()
@@ -35,8 +34,15 @@ export default function AppRouter() {
       }else{
         setIsLoggedIn(false)
       }
+      setCheckin(false)
     })
   }, [])
+
+  if(checkin){
+    return(
+      <h1>espere...</h1>
+    )
+  }
 
 
   return (
