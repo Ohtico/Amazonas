@@ -41,6 +41,7 @@ export default function Detalle() {
             alt={nombre}
             loading="lazy"
           />
+          
         </Grid>
         <Grid item xs={4}>
           <h4>{nombre}</h4>
@@ -81,7 +82,7 @@ export default function Detalle() {
             <Button variant="contained" id="card" size="medium">
               <span>
                 <i className="material-icons" id="br">
-                  shopping_cart
+                smart_display
                 </i>
               </span>{" "}
               Agregar al Carrito
