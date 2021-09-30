@@ -1,17 +1,17 @@
-import { types } from '../types/types'
+import { types } from "../types/types";
 
 const initialState = {
-    product: []
-}
+  product: [],
+};
 
-export const ProductReducer = (state = initialState, action) =>{
-    switch(action.type){
-        case types.productLoad:
-            return {
-                ...state,
-                product: action.payload
-            }   
-        default:
-            return state
-    }
-}
+export const ProductReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.productLoad:
+      return {
+        ...state,
+        product: action.payload,
+      };
+    default:
+      return state;
+  }
+};

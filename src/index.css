@@ -7,3 +7,40 @@ i {
     color: #ffa41c;
     margin-top: 5px;
   }
+
+.pointer{
+    cursor: pointer;
+}
+.decoracion{
+    text-decoration: none;
+    color:black;
+}
+.decoracion:hover{
+    color: #690606;
+}
+.listando{
+    margin: 13%;
+    width: 50%;
+    margin-top: 30%;
+}
+.responsive{
+    width: 85%;
+}
+.predeterminado{
+    color:#ff0000;
+}
+#carrito{
+    font-size: 10px;
+    background: #F3D184;
+    color: #000;
+    margin: 5%;
+}
+#br{
+    color: #000;
+}
+#card{
+    font-size: 10px;
+    background: #F0AD64;
+    color: #000;
+    margin: 5%;
+}

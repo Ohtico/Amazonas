@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import AppRouter from './routers/AppRouter';
-
+import React, { useEffect, useState } from "react";
+import AppRouter from "./routers/AppRouter";
 
 export const RegistroApp = () => {
-    return (
-        <div>
-        <AppRouter />
-        </div>     
-    )       
-}
+  return (
+    <div>
+      <AppRouter />
+    </div>
+  );
+};
