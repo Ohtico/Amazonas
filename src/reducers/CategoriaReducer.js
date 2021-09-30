@@ -4,9 +4,9 @@ const initialState = {
     product: []
 }
 
-export const ProductReducer = (state = initialState, action) =>{
+export const CategoriaReducer = (state = initialState, action) =>{
     switch(action.type){
-        case types.productLoad:
+        case types.productActive:
             return {
                 ...state,
                 product: action.payload

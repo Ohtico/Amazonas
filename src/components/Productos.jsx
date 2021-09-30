@@ -24,6 +24,10 @@ export const Productos = () => {
     const computadores = useSelector(state => state.product)
     const { product } = computadores
 
+    // let resultados = product.filter(product => product.categoria === 'gadget')
+
+    // console.log(resultados);
+
 
     return (
 

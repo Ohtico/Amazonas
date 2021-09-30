@@ -8,15 +8,18 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-
+import { useDispatch } from 'react-redux';
+import { setProduct, Listar } from '../actions/actionProduct'
+import { useSelector } from 'react-redux';
 
 const BarraDos = () => {
 
+    const dispatch = useDispatch()
+    const computadores = useSelector(state => state.categoria)
+    const { product } = computadores
+
     const [state, setState] = React.useState({
-        top: false,
         left: false,
-        bottom: false,
-        right: false,
     });
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -31,6 +34,12 @@ const BarraDos = () => {
         setState({ ...state, [anchor]: open });
     };
 
+    const mostCat = (text) => {
+        let resultados = product.filter(product => product.categoria.toLowerCase() === text.toLowerCase())
+        dispatch(setProduct(resultados))
+    }
+
+
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -39,8 +48,10 @@ const BarraDos = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Computadores', 'Smart Home', 'Arte y Artesania'].map((text, index) => (
-                    <ListItem button key={text}>
+                {['Computador', 'Portatil', 'Pantalla', 'Gadget'].map((text, index) => (
+                    <ListItem key={text} 
+                    onClick={() => mostCat(text)}
+                     button >
                         <ListItemText primary={text} />
                         <i className="material-icons" id="car">keyboard_arrow_right</i>
                         <Divider />
@@ -53,7 +64,7 @@ const BarraDos = () => {
     return (
         <>
             <Toolbar
-                sx={{ backgroundColor: "#242F3E"  }}>
+                sx={{ backgroundColor: "#242F3E" }}>
                 <Typography
                     variant="p"
                     noWrap
