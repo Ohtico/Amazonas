@@ -4,12 +4,12 @@ import TextField from "@mui/material/TextField";
 import { useForm } from "../hooks/useForm";
 import { fileUpload } from "../helpers/fileUpload";
 import { useDispatch } from "react-redux";
-import {registerArticuloP } from '../actions/actionArcticulo'
+import { registerArticuloP } from "../actions/actionArcticulo";
 
 export default function Agregar() {
   const [img, setImg] = useState();
   const [descripciones, setDescripciones] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let imgUpload = [];
   let timeout = null;
   const [values, handleInputChange, reset] = useForm({
@@ -52,9 +52,11 @@ export default function Agregar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    image = img
-    descripcion = descripciones
-    dispatch(registerArticuloP(nombre, precio, ahorras, categoria, image, descripcion))
+    image = img;
+    descripcion = descripciones;
+    dispatch(
+      registerArticuloP(nombre, precio, ahorras, categoria, image, descripcion)
+    );
   };
 
   return (
@@ -72,6 +74,7 @@ export default function Agregar() {
       autoComplete="off"
     >
       <h1>Agregar Nuevos Articulos</h1>
+
       <div>
         <TextField
           sx={{ mt: 3 }}
@@ -150,10 +153,7 @@ export default function Agregar() {
           Agregar Imagen
         </button>
         <input type="file" multiple id="upload" onChange={handleUpload} />
-        <button 
-        id="foto"
-        type="submit"
-        >
+        <button id="foto" type="submit">
           <span>
             <i className="material-icons" id="br">
               cloud_upload
