@@ -4,6 +4,7 @@ import { loginReducer } from "../reducers/loginReducer";
 import { registerReducer } from "../reducers/registerReducer";
 import { ProductReducer } from "../reducers/ProductReducer";
 import { CategoriaReducer } from "../reducers/CategoriaReducer";
+import { postReducer } from "../reducers/postReducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   register: registerReducer,
   product: ProductReducer,
   categoria: CategoriaReducer,
+  articulo: postReducer,
 });
 
 export const store = createStore(

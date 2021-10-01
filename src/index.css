@@ -56,3 +56,18 @@ i {
     border-radius: 4px;
     width: 100%;
 }
+#foto{
+    font-size: 15px;
+    background: #f19a3c;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    border: 0;
+    border-radius: 4px;
+    width: 94%;
+}
+#upload{
+    display: none;
+}

@@ -5,5 +5,8 @@ export const types = {
     logout: 'logout',
     productLoad: '[Producto] Load product',
     productActive: '[Producto] Active productos'
+}
 
+export const typesArticulo = {
+    resgister: 'register'
 }
