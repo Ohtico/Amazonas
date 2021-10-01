@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
+import ReactImageMagnify from "react-image-magnify";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useSelector } from "react-redux";
 import ListItem from "@mui/material/ListItem";
@@ -21,7 +21,12 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Detalle() {
   const detalle = useSelector((state) => state.categoria);
   const { image, precio, nombre, ahorras, descripcion } = detalle.product;
-  console.log(image);
+
+  const [imagen, setImagen] = React.useState(`${image[0]}`);
+
+  const mostrar = (img) => {
+    setImagen(img);
+  };
 
   return (
     <Box sx={{ flexGrow: 1, mt: 20 }}>
@@ -29,19 +34,32 @@ export default function Detalle() {
         <Grid item xs={1}>
           {image.map((item) => (
             <ImageListItem className="listando" key={item}>
-              <img src={item} srcSet={item} alt={nombre} loading="lazy" />
+              <img
+                src={item}
+                onClick={() => mostrar(item)}
+                srcSet={item}
+                alt={nombre}
+                loading="lazy"
+              />
             </ImageListItem>
           ))}
         </Grid>
         <Grid item xs={5}>
-          <img
-            className="responsive"
-            src={image[0]}
-            srcSet={image[0]}
-            alt={nombre}
-            loading="lazy"
+          <ReactImageMagnify
+            {...{
+              smallImage: {
+                alt: "Wristwatch by Ted Baker London",
+                isFluidWidth: true,
+                src: imagen,
+              },
+              largeImage: {
+                src: imagen,
+                width: 600,
+                height: 650,
+                zIndex: 9999,
+              },
+            }}
           />
-          
         </Grid>
         <Grid item xs={4}>
           <h4>{nombre}</h4>
@@ -60,7 +78,13 @@ export default function Detalle() {
           </ul>
         </Grid>
         <Grid item xs={2}>
-          <Item className="claridad">
+          <Item
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <h3>
               <span className="predeterminado">${precio}</span>
             </h3>
@@ -71,22 +95,22 @@ export default function Detalle() {
             <h5 className="predeterminado">
               Puede que lo recibas en halloween
             </h5>
-            <Button variant="contained" id="carrito" size="medium">
+            <button id="carrito">
               <span>
                 <i className="material-icons" id="br">
                   shopping_cart
                 </i>
-              </span>{" "}
+              </span>
               Agregar al Carrito
-            </Button>
-            <Button variant="contained" id="card" size="medium">
+            </button>
+            <button id="card">
               <span>
                 <i className="material-icons" id="br">
-                smart_display
+                  smart_display
                 </i>
-              </span>{" "}
+              </span>
               Agregar al Carrito
-            </Button>
+            </button>
             <h5>Transacción segura</h5>
           </Item>
         </Grid>

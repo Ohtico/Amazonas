@@ -56,7 +56,7 @@ export default function AppRouter() {
 
         <PrivateRouter
           exact
-          path="/productos"
+          path="/"
           isAuthenticated={isLoggedIn}
           component={Productos}
         />
