@@ -6,10 +6,6 @@ import Grid from "@mui/material/Grid";
 import ReactImageMagnify from "react-image-magnify";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useSelector } from "react-redux";
-import ListItem from "@mui/material/ListItem";
-
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -48,15 +44,14 @@ export default function Detalle() {
           <ReactImageMagnify
             {...{
               smallImage: {
-                alt: "Wristwatch by Ted Baker London",
+                alt: `${nombre}`,
                 isFluidWidth: true,
                 src: imagen,
               },
               largeImage: {
                 src: imagen,
-                width: 600,
-                height: 650,
-                zIndex: 9999,
+                width: 800,
+                height: 1050,
               },
             }}
           />
@@ -86,7 +81,7 @@ export default function Detalle() {
             }}
           >
             <h3>
-              <span className="predeterminado">${precio}</span>
+              <span className="predeterminado">US${precio}</span>
             </h3>
             <span>Envio Gratis</span>
             <h5>

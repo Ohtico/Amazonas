@@ -90,7 +90,7 @@ const BarraP = () => {
 
           <Search>
             <SearchIconWrapper>
-              <i className="material-icons" id="car">
+              <i className="material-icons" id="br">
                 search
               </i>
             </SearchIconWrapper>

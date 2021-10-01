@@ -6,14 +6,12 @@ import { Productos } from "../components/Productos";
 import PrivateRouter from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
 import Detalle from "../components/Detalle";
-
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Listar } from "../actions/actionProduct";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
-// import { loginSincrono } from "../actions/actionLogin";
-//import { LoadTaks } from "../helpers/LoadTaks";
+import  Agregar  from "../components/Agregar";
+
+
 
 export default function AppRouter() {
   const [checkin, setCheckin] = useState(true);
@@ -34,7 +32,7 @@ export default function AppRouter() {
   }, []);
 
   if (checkin) {
-    return <h1>espere...</h1>;
+    return <h1>Espere...</h1>;
   }
 
   return (
@@ -66,6 +64,13 @@ export default function AppRouter() {
           path="/detalle"
           isAuthenticated={isLoggedIn}
           component={Detalle}
+        />
+
+        <PrivateRouter
+          exact
+          path="/agregar"
+          isAuthenticated={isLoggedIn}
+          component={Agregar}
         />
 
         <Redirect to="/auth/login" />
