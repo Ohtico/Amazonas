@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCategoria } from "../actions/actionProduct";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -89,71 +91,80 @@ export const Productos = () => {
             </div>
           </Item>
         </Grid>
-
-        <Grid item xs={8}>
-          {product.map((probando) => (
-            <Card sx={{ display: "flex", mt: 2 }}>
-              <CardMedia
-                key={probando}
-                component="img"
-                sx={{ width: 190, m: 2 }}
-                image={probando.image[0]}
-                alt={probando.nombre}
-              />
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="p">
-                    <Link
-                      className="decoracion"
-                      to="/detalle"
-                      onClick={() => dispatch(setCategoria(probando))}
+        {product.length ? (
+          <Grid item xs={8}>
+            {product.map((probando) => (
+              <Card sx={{ display: "flex", mt: 2 }}>
+                <CardMedia
+                  key={probando}
+                  component="img"
+                  sx={{ width: 190, m: 2 }}
+                  image={probando.image[0]}
+                  alt={probando.nombre}
+                />
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <CardContent sx={{ flex: "1 0 auto" }}>
+                    <Typography component="div" variant="p">
+                      <Link
+                        className="decoracion"
+                        to="/detalle"
+                        onClick={() => dispatch(setCategoria(probando))}
+                      >
+                        <strong> {probando.nombre}</strong>
+                      </Link>
+                    </Typography>
+                    <div>
+                      <i className="material-icons" id="car">
+                        star
+                      </i>
+                      <i className="material-icons" id="car">
+                        star
+                      </i>
+                      <i className="material-icons" id="car">
+                        star
+                      </i>
+                      <i className="material-icons" id="car">
+                        star
+                      </i>
+                      <i className="material-icons" id="car">
+                        star
+                      </i>
+                    </div>
+                    <Typography
+                      variant="h6"
+                      color="text.secondary"
+                      component="div"
                     >
-                      <strong> {probando.nombre}</strong>
-                    </Link>
-                  </Typography>
-                  <div>
-                    <i className="material-icons" id="car">
-                      star
-                    </i>
-                    <i className="material-icons" id="car">
-                      star
-                    </i>
-                    <i className="material-icons" id="car">
-                      star
-                    </i>
-                    <i className="material-icons" id="car">
-                      star
-                    </i>
-                    <i className="material-icons" id="car">
-                      star
-                    </i>
-                  </div>
-                  <Typography
-                    variant="h6"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    us${probando.precio}
-                  </Typography>
-                  <Typography
-                    variant="p"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    us${probando.ahorras}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Envio Gratis a Colombia
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
-          ))}
-        </Grid>
+                      us${probando.precio}
+                    </Typography>
+                    <Typography
+                      variant="p"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      us${probando.ahorras}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Envio Gratis a Colombia
+                    </Typography>
+                  </CardContent>
+                </Box>
+              </Card>
+            ))}
+          </Grid>
+        ) : (
+          <Stack sx={{ width: "80%", m:2 }} spacing={2}>
+            <Alert variant="filled" severity="warning">
+            No se encontraron articulos por este nombre — Prueba con otro
+              nombre!
+            </Alert>
+            
+          </Stack>
+        )}
       </Grid>
     </Box>
   );

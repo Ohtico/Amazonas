@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { startLogout } from "../actions/actionLogin";
 import { useForm } from "../hooks/useForm";
 import { useSelector } from "react-redux";
-import { busquedaSimple } from "../actions/actionProduct";
+import { setProduct } from "../actions/actionProduct";
 import { useUbicacion } from "../hooks/useUbicacion";
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,34 +58,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const BarraP = () => {
 
-  // const [ciudad, pais, watch, setWatch] = useUbicacion()
- 
-  // const handleUbic = async () => {
-  //   console.log(watch);
-  //   setWatch(true)
-  //   console.log(ciudad);
-  //   console.log(pais);
-
-  // }
+  const [ciudad, pais, watch, setWatch] = useUbicacion()
+  const handleUbic = async () => {
+    console.log(watch);
+    setWatch(true)
+  }
 
   const computadores = useSelector((state) => state.categoria);
   const { product } = computadores;
   const dispatch = useDispatch();
 
-  const [values, handleInputChange, reset, setValues] = useForm({
-    search: "",
-  });
-  const { search } = values;
   const [busqueda, setBusqueda] = React.useState("");
 
   const handleBusqueda = (e) => {
-    setBusqueda(e.target.value);
-    dispatch(busquedaSimple(busqueda));
-  };
-
-  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(busquedaSimple(busqueda));
+    setBusqueda(e.target.value);
+    let final = product.filter(rest => rest.nombre.toLowerCase().includes(busqueda.toLowerCase())  )
+    dispatch(setProduct(final));
   };
 
   return (
@@ -118,12 +107,12 @@ const BarraP = () => {
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
-            // onClick={handleUbic}
+            onClick={handleUbic}
           >
             Hola
             <p>Elige tu dirección</p>
           </Typography>
-          <Box component="form" onSubmit={handleSubmit}>
+          <Box component="form">
             <Search>
               <SearchIconWrapper>
                 <i className="material-icons" id="br" type="submit">

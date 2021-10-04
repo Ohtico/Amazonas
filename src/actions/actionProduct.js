@@ -76,20 +76,3 @@ export const EditProduct = (
     });
   };
 };
-
-export const busquedaSimple = (search) => {
-  return async (dispatch) => {
-    const citiesRef = collection(db, "Computadores");
-    const q = query(citiesRef, where("categoria", "==", search));
-
-    const querySnapshot = await getDocs(q);
-    let array = [];
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-      array.push(doc.data());
-    });
-    console.log(array);
-    // console.log(querySnapshot);
-    dispatch(setProduct(array));
-  };
-};
