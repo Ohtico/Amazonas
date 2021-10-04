@@ -11,7 +11,7 @@ import { startLogout } from "../actions/actionLogin";
 import { useForm } from "../hooks/useForm";
 import { useSelector } from "react-redux";
 import { busquedaSimple } from "../actions/actionProduct";
-import { usePosition } from "use-position";
+import { useUbicacion } from "../hooks/useUbicacion";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,28 +54,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-let ubicacion =
-  "http://api.positionstack.com/v1/reverse?access_key=5e23d03aefeb28719b149564226e4ba9&query=";
+
 
 const BarraP = () => {
-  //libreria de busqueda
-  const [ciudad, setCiudad] = useState("");
 
-  // const watch = true;
-  // const { latitude, longitude } = usePosition(watch, {
-  //   enableHighAccuracy: true,
-  // });
+  // const [ciudad, pais, watch, setWatch] = useUbicacion()
+ 
+  // const handleUbic = async () => {
+  //   console.log(watch);
+  //   setWatch(true)
+  //   console.log(ciudad);
+  //   console.log(pais);
 
-  // useEffect(() => {
-  //   mandaLocation(latitude, longitude);
-  // }, []);
-
-  // const mandaLocation = async (lat, lon) => {
-  //   const rest = await fetch(`${ubicacion}${lat},${lon}`);
-  //   const data = await rest.json();
-  //   console.log(data.data[0].country);
-  //   // console.log(ciudad);
-  // };
+  // }
 
   const computadores = useSelector((state) => state.categoria);
   const { product } = computadores;
@@ -127,6 +118,7 @@ const BarraP = () => {
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
+            // onClick={handleUbic}
           >
             Hola
             <p>Elige tu dirección</p>
