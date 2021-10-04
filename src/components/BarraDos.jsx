@@ -11,8 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useDispatch } from "react-redux";
 import { setProduct, Listar } from "../actions/actionProduct";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom"
-
+import { useHistory } from "react-router-dom";
 
 const BarraDos = () => {
   let history = useHistory();
@@ -45,11 +44,10 @@ const BarraDos = () => {
   const todaCateg = (e) => {
     dispatch(Listar(e.target.id));
     history.push("/productos");
-  
   };
   const agregarP = () => {
     history.push("/agregar");
-  }
+  };
 
   const list = (anchor) => (
     <Box
@@ -121,7 +119,14 @@ const BarraDos = () => {
         <Typography variant="p" noWrap component="div" sx={{ ml: 4 }}>
           Lo Más Vendidos
         </Typography>
-        <Typography className="pointer" onClick={() => agregarP()} variant="p" noWrap component="div" sx={{ ml: 4 }}>
+        <Typography
+          className="pointer"
+          onClick={() => agregarP()}
+          variant="p"
+          noWrap
+          component="div"
+          sx={{ ml: 4 }}
+        >
           Agregar Nuevo Articulo
         </Typography>
       </Toolbar>

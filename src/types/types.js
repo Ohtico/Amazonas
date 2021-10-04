@@ -8,5 +8,7 @@ export const types = {
 }
 
 export const typesArticulo = {
-    resgister: 'register'
+    resgister: 'register',
+    artUpdate: 'actualizar',
+    artDelete: 'eliminar'
 }

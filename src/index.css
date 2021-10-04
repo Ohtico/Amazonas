@@ -71,3 +71,18 @@ i {
 #upload{
     display: none;
 }
+
+textarea{
+    width: 100%;
+    height: 7vh;
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 6px;
+    margin-top: 18%;
+    font-size: 19px;
+}
+textarea::-webkit-scrollbar {
+    display: none;
+}
+textarea:hover {
+    border: 2px solid#f19a3c;
+}

@@ -5,7 +5,9 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ReactImageMagnify from "react-image-magnify";
 import ImageListItem from "@mui/material/ImageListItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { DeleteArt } from "../actions/actionProduct";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,12 +18,22 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Detalle() {
   const detalle = useSelector((state) => state.categoria);
-  const { image, precio, nombre, ahorras, descripcion } = detalle.product;
-
+  const { image, precio, nombre, ahorras, descripcion, id } = detalle.product;
+  let history = useHistory();
   const [imagen, setImagen] = React.useState(`${image[0]}`);
+  const dispatch = useDispatch();
 
   const mostrar = (img) => {
     setImagen(img);
+  };
+
+  const handleEdit = () => {
+    history.push("/agregar");
+  };
+
+  const handleDelete = (id) => {
+    dispatch(DeleteArt(id));
+    history.push("/");
   };
 
   return (
@@ -90,21 +102,22 @@ export default function Detalle() {
             <h5 className="predeterminado">
               Puede que lo recibas en halloween
             </h5>
-            <button id="carrito">
-              <span>
-                <i className="material-icons" id="br">
-                  shopping_cart
-                </i>
-              </span>
-              Agregar al Carrito
-            </button>
-            <button id="card">
+
+            <button id="card" onClick={handleEdit}>
               <span>
                 <i className="material-icons" id="br">
                   smart_display
                 </i>
               </span>
-              Agregar al Carrito
+              Editar
+            </button>
+            <button id="card" onClick={() => handleDelete(id)}>
+              <span>
+                <i className="material-icons" id="br">
+                  smart_display
+                </i>
+              </span>
+              Eliminar Articulo
             </button>
             <h5>Transacción segura</h5>
           </Item>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { useForm } from "../hooks/useForm";
 import { fileUpload } from "../helpers/fileUpload";
 import { useDispatch } from "react-redux";
 import { registerArticuloP } from "../actions/actionArcticulo";
+import { useSelector } from "react-redux";
+import { EditProduct } from "../actions/actionProduct";
 
 export default function Agregar() {
   const [img, setImg] = useState();
@@ -12,7 +13,28 @@ export default function Agregar() {
   const dispatch = useDispatch();
   let imgUpload = [];
   let timeout = null;
-  const [values, handleInputChange, reset] = useForm({
+
+  //editar articulos}
+  let titulo1 = "Agregar Nuevos Articulos";
+  let titulo2 = "Editar Este Articulos";
+  const [titulo, setTitulo] = useState(titulo1);
+  const detalle = useSelector((state) => state.categoria);
+  const { product } = detalle;
+  const [editForm, setEditForm] = useState(false);
+
+  let identida = product.id;
+
+  useEffect(() => {
+    if (product.length === undefined) {
+      setTitulo(titulo2);
+      setEditForm(true);
+      setValues(product);
+    } else {
+      console.log("Estas agregando");
+    }
+  }, []);
+
+  const [values, handleInputChange, reset, setValues] = useForm({
     nombre: "",
     precio: "",
     ahorras: "",
@@ -54,9 +76,32 @@ export default function Agregar() {
     e.preventDefault();
     image = img;
     descripcion = descripciones;
-    dispatch(
-      registerArticuloP(nombre, precio, ahorras, categoria, image, descripcion)
-    );
+    if (editForm) {
+      // alert("editar")
+      dispatch(
+        EditProduct(
+          nombre,
+          precio,
+          ahorras,
+          categoria,
+          image,
+          descripcion,
+          identida
+        )
+      );
+    } else {
+      // alert("agregar nuevo")
+      dispatch(
+        registerArticuloP(
+          nombre,
+          precio,
+          ahorras,
+          categoria,
+          image,
+          descripcion
+        )
+      );
+    }
   };
 
   return (
@@ -73,74 +118,58 @@ export default function Agregar() {
       noValidate
       autoComplete="off"
     >
-      <h1>Agregar Nuevos Articulos</h1>
+      <h1>{titulo}</h1>
 
       <div>
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="nombre"
+        <textarea
           name="nombre"
+          placeholder="nombre"
+          value={nombre}
           onChange={handleInputChange}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="precio"
+        <textarea
+          placeholder="precio"
           name="precio"
+          value={precio}
           onChange={handleInputChange}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="ahorras"
+        <textarea
+          placeholder="ahorras"
           name="ahorras"
+          value={ahorras}
           onChange={handleInputChange}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="categoria"
+        <textarea
+          placeholder="categoria"
           name="categoria"
+          value={categoria}
           onChange={handleInputChange}
-          variant="outlined"
         />
       </div>
       <div>
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="Descripcion Uno"
-          name="descripcionU"
+        <textarea
+          placeholder="Descripcion Uno"
+          name="descripcion"
+          defaultValue={descripcion[0]}
           onKeyUp={handleInputDes}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="Descripcion Dos"
+        <textarea
+          placeholder="Descripcion Dos"
           name="descripcionD"
+          defaultValue={descripcion[1]}
           onKeyUp={handleInputDes}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="Descripcion Tres"
+        <textarea
+          placeholder="Descripcion Tres"
           name="descripcionT"
+          defaultValue={descripcion[2]}
           onKeyUp={handleInputDes}
-          variant="outlined"
         />
-        <TextField
-          sx={{ mt: 3 }}
-          id="outlined-basic"
-          label="Descripcion Cuatro"
+        <textarea
+          placeholder="Descripcion Cuatro"
           name="descripcionC"
+          defaultValue={descripcion[3]}
           onKeyUp={handleInputDes}
-          variant="outlined"
         />
       </div>
       <div>
@@ -153,14 +182,26 @@ export default function Agregar() {
           Agregar Imagen
         </button>
         <input type="file" multiple id="upload" onChange={handleUpload} />
-        <button id="foto" type="submit">
-          <span>
-            <i className="material-icons" id="br">
-              cloud_upload
-            </i>
-          </span>
-          Cargar Articulo
-        </button>
+
+        {!editForm ? (
+          <button id="foto" type="submit">
+            <span>
+              <i className="material-icons" id="br">
+                cloud_upload
+              </i>
+            </span>
+            Cargar Articulo
+          </button>
+        ) : (
+          <button id="foto" type="submit">
+            <span>
+              <i className="material-icons" id="br">
+                file_upload
+              </i>
+            </span>
+            Actualizar Articulo
+          </button>
+        )}
       </div>
     </Box>
   );

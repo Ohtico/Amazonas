@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,6 +8,10 @@ import InputBase from "@mui/material/InputBase";
 import BarraDos from "./BarraDos";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../actions/actionLogin";
+import { useForm } from "../hooks/useForm";
+import { useSelector } from "react-redux";
+import { busquedaSimple } from "../actions/actionProduct";
+import { usePosition } from "use-position";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -50,8 +54,48 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+let ubicacion =
+  "http://api.positionstack.com/v1/reverse?access_key=5e23d03aefeb28719b149564226e4ba9&query=";
+
 const BarraP = () => {
+  //libreria de busqueda
+  const [ciudad, setCiudad] = useState("");
+
+  // const watch = true;
+  // const { latitude, longitude } = usePosition(watch, {
+  //   enableHighAccuracy: true,
+  // });
+
+  // useEffect(() => {
+  //   mandaLocation(latitude, longitude);
+  // }, []);
+
+  // const mandaLocation = async (lat, lon) => {
+  //   const rest = await fetch(`${ubicacion}${lat},${lon}`);
+  //   const data = await rest.json();
+  //   console.log(data.data[0].country);
+  //   // console.log(ciudad);
+  // };
+
+  const computadores = useSelector((state) => state.categoria);
+  const { product } = computadores;
   const dispatch = useDispatch();
+
+  const [values, handleInputChange, reset, setValues] = useForm({
+    search: "",
+  });
+  const { search } = values;
+  const [busqueda, setBusqueda] = React.useState("");
+
+  const handleBusqueda = (e) => {
+    setBusqueda(e.target.value);
+    dispatch(busquedaSimple(busqueda));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(busquedaSimple(busqueda));
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -87,18 +131,22 @@ const BarraP = () => {
             Hola
             <p>Elige tu dirección</p>
           </Typography>
+          <Box component="form" onSubmit={handleSubmit}>
+            <Search>
+              <SearchIconWrapper>
+                <i className="material-icons" id="br" type="submit">
+                  search
+                </i>
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                name="search"
+                onChange={handleBusqueda}
+              />
+            </Search>
+          </Box>
 
-          <Search>
-            <SearchIconWrapper>
-              <i className="material-icons" id="br">
-                search
-              </i>
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Typography
             variant="p"
             noWrap

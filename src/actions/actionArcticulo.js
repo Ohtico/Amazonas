@@ -19,13 +19,13 @@ export const registerArticuloP = (
       image,
       descripcion,
     };
-    addDoc(collection(db,"Computadores"), newArticulo)
-    .then(resp => {
-        dispatch(registerArticulaSincrono(newArticulo))
-    })
-    .catch(error => {
-        console.log(error)
-    })
+    addDoc(collection(db, "Computadores"), newArticulo)
+      .then((resp) => {
+        dispatch(registerArticulaSincrono(newArticulo));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 
