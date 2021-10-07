@@ -1,42 +1,36 @@
 import { usePosition } from "use-position";
 import { useEffect, useState } from "react";
 
-
-
 export const useUbicacion = () => {
-  const [ciudad, setCiudad] = useState("");
-  const [pais, setPais] = useState("");
-  const [watch, setWatch] = useState(false)
+  const [donde, setDonde] = useState('')
+  const [watch, setWatch] = useState(false);
   let requestOptions = {
-    method: 'GET',
+    method: "GET",
   };
-  
+
   const { latitude, longitude } = usePosition(watch, {
     enableHighAccuracy: true,
   });
 
   useEffect(() => {
-    if(latitude !== undefined && longitude !== undefined){
-        mandaLocation()
+    if (latitude !== undefined && longitude !== undefined) {
+      mandaLocation();
     }
   }, [watch]);
 
-  const mandaLocation = (lat, lon) => {
+  const mandaLocation = () => {
     
-    fetch("https://api.geoapify.com/v1/geocode/search?text=38%20Upper%20Montagu%20Street%2C%20Westminster%20W1H%201LJ%2C%20United%20Kingdom&apiKey=8545f7326d4c4b58a17bddc2c9a7609c", requestOptions)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-    
-    
-    
-    
-    // const rest = await fetch(`${lat},${lon}`);
-    // const data = await rest.json();
-    // setPais(data.data[0].country);
-    // setCiudad(data.data[0].region)
-    
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=8545f7326d4c4b58a17bddc2c9a7609c`)
+        .then(response => response.json())
+        .then(result => {
+            if (result.features.length) {
+              setDonde(result.features[0].properties.address_line2);
+                console.log(latitude, longitude)
+            } else {
+                console.log("No address found");
+            }
+        });
   };
 
-  return [ciudad, pais, watch, setWatch];
+  return [donde, watch, setWatch];
 };

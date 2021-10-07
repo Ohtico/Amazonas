@@ -54,15 +54,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
 const BarraP = () => {
-
-  const [ciudad, pais, watch, setWatch] = useUbicacion()
+  const [donde, watch, setWatch] = useUbicacion();
   const handleUbic = async () => {
-    console.log(watch);
-    setWatch(true)
-  }
+    setWatch(true);
+    console.log(donde);
+  };
 
   const computadores = useSelector((state) => state.categoria);
   const { product } = computadores;
@@ -73,7 +70,9 @@ const BarraP = () => {
   const handleBusqueda = (e) => {
     e.preventDefault();
     setBusqueda(e.target.value);
-    let final = product.filter(rest => rest.nombre.toLowerCase().includes(busqueda.toLowerCase())  )
+    let final = product.filter((rest) =>
+      rest.nombre.toLowerCase().includes(busqueda.toLowerCase())
+    );
     dispatch(setProduct(final));
   };
 
@@ -102,16 +101,31 @@ const BarraP = () => {
               location_on
             </i>
           </Typography>
-          <Typography
-            variant="p"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-            onClick={handleUbic}
-          >
-            Hola
-            <p>Elige tu dirección</p>
-          </Typography>
+
+          {watch ? (
+            <Typography
+              variant="p"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              <p>{donde}</p>
+            </Typography>
+          ) : (
+            <Typography
+              variant="p"
+              noWrap
+              component="div"
+            className="pointer"
+
+              sx={{ display: { xs: "none", sm: "block" } }}
+              onClick={handleUbic}
+            >
+              Hola
+              <p>Elige tu dirección</p>
+            </Typography>
+          )}
+
           <Box component="form">
             <Search>
               <SearchIconWrapper>
@@ -145,14 +159,7 @@ const BarraP = () => {
             Devoluciones
             <p>Y Pedidos</p>
           </Typography>
-          <Typography variant="p" noWrap component="div" sx={{ ml: 5 }}>
-            <i className="material-icons" id="car">
-              shopping_cart
-            </i>
-          </Typography>
-          <Typography variant="p" noWrap component="div" sx={{ ml: 2 }}>
-            Carrito
-          </Typography>
+          
         </Toolbar>
         <BarraDos />
       </AppBar>
