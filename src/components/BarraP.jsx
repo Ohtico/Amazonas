@@ -116,8 +116,7 @@ const BarraP = () => {
               variant="p"
               noWrap
               component="div"
-            className="pointer"
-
+              className="pointer"
               sx={{ display: { xs: "none", sm: "block" } }}
               onClick={handleUbic}
             >
@@ -159,7 +158,6 @@ const BarraP = () => {
             Devoluciones
             <p>Y Pedidos</p>
           </Typography>
-          
         </Toolbar>
         <BarraDos />
       </AppBar>
